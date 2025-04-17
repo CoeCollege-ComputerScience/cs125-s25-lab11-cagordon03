@@ -23,9 +23,18 @@ def scoreWord(word):
 
     return score
 
-print(scoreWord("lovely"))
+# print(scoreWord("lovely"))
 
 
 # Note - add your code here if you completed the "Competency" option on the quiz
 def topNWords(length, numWords):
-    print("To do if outlined on quiz")
+        words = ["example", "lovely", "python", "coding"]  # Replace with actual word list
+        filtered_words = [word for word in words if len(word) == length]  # Filter words by length
+        scored_words = [(word, scoreWord(word)) for word in filtered_words]  # Calculate scores for each word
+        scored_words.sort(key=lambda x: x[1], reverse=True)  # Sort by score in descending order
+        nwords = scored_words[:numWords]  # Get the top N words
+        return nwords
+    
+    # Example usage
+print(topNWords(6, 2))  # Replace 6 and 3 with desired length and number of words
+
