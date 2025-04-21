@@ -153,15 +153,15 @@ all_majors = cs_majors.union(math_majors)
 strictly_cs_majors = cs_majors.difference(math_majors)
 
 # Read the data from the studentYear.txt file
-with open("studentYear.txt", "r") as year_file:
-    student_years = {}
-    for line in year_file.readlines()[1:]:  # Skip the first line
-        parts = line.split(",")
-        if len(parts) == 2:  # Ensure the line has exactly two parts
-            name = parts[1].strip()
-            year = parts[0].strip().split()[0]  # Extract the year
-            if year.isdigit():  # Ensure the year is a valid number
-                student_years[name] = int(year)
+# with open("studentYear.txt", "r") as year_file:
+#     student_years = {}
+#     for line in year_file.readlines()[1:]:  # Skip the first line
+#         parts = line.split(",")
+#         if len(parts) == 2:  # Ensure the line has exactly two parts
+#             name = parts[1].strip()
+#             year = parts[0].strip().split()[0]  # Extract the year
+#             if year.isdigit():  # Ensure the year is a valid number
+#                 student_years[name] = int(year)
 
 # # a. All sophomore level CS majors
 # sophomore_cs_majors = {student for student in cs_majors if student_years.get(student) == 2}
@@ -179,6 +179,54 @@ with open("studentYear.txt", "r") as year_file:
 # print("Math Majors:", math_majors)
 # print("Strictly CS Majors:", strictly_cs_majors)
 # print("Student Years:", student_years)
+
+# with open("cs.txt", "r") as cs_file:
+#     cs_majors = set(line.strip() for line in cs_file.readlines()[1:])
+#     print("CS Majors:", cs_majors)
+
+# with open("math.txt", "r") as math_file:
+#     math_majors = set(line.strip() for line in math_file.readlines()[1:])
+#     print("Math Majors:", math_majors)
+
+# with open("studentYear.txt", "r") as year_file:
+#     student_years = {}
+#     for line in year_file.readlines()[1:]:
+#         parts = line.split(",")
+#         if len(parts) == 2:
+#             name = parts[1].strip()
+#             year = parts[0].strip()
+#             student_years[name] = int(year)
+#     print("Student Years:", student_years)
+
+# with open("studentYear.txt", "r") as year_file:
+#     student_years = {}
+#     for line in year_file.readlines()[1:]:
+#         parts = line.split(",")
+#         if len(parts) == 2:
+#             name = parts[1].strip()
+#             year = parts[0].strip()
+#             if year.isdigit():  # Ensure the year is a valid number
+#                 student_years[name] = int(year)
+#             else:
+#                 print(f"Skipping invalid year value: '{year}'")
+#         else:
+#             print(f"Skipping malformed line: '{line.strip()}'")
+#     print("Student Years:", student_years)
+
+with open("studentYear.txt", "r") as year_file:
+    student_years = {}
+    for line in year_file.readlines()[1:]:  # Skip the first line
+        parts = line.split(maxsplit=1)  # Split by whitespace, only once
+        if len(parts) == 2:  # Ensure the line has exactly two parts
+            year = parts[0].strip()  # Extract the year
+            name = parts[1].strip()  # Extract the name
+            if year.isdigit():  # Ensure the year is a valid number
+                student_years[name] = int(year)
+            else:
+                print(f"Skipping invalid year value: '{year}'")
+        else:
+            print(f"Skipping malformed line: '{line.strip()}'")
+    print("Student Years:", student_years)
 
 # # Sophomore CS Majors
 sophomore_cs_majors = {student for student in cs_majors if student_years.get(student) == 2}
